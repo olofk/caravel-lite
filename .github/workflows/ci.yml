@@ -2,7 +2,7 @@ name: sim-caravel-icarus
 on: [push]
 
 jobs:
-  sim-icarus:
+  prepare:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Caravel-lite
@@ -20,6 +20,18 @@ jobs:
       - run: pip3 install fusesoc
       - run: fusesoc library add caravel $GITHUB_WORKSPACE/caravel-lite
       - run: fusesoc library add pdk $GITHUB_WORKSPACE/pdklite
+      - name: Cache Primes
+        id: cache-primes
+        uses: actions/cache@v2
+        with:
+          path: $GITHUB_WORKSPACE
+          key: ${{ runner.os }}-primes
+
+  sim-icarus:
+    needs: prepare
+    runs-on: ubuntu-latest
+      - run: echo $GITHUB_WORKSPACE/bin >> $GITHUB_PATH
       - run: fusesoc run --target=gpio_wb_tb caravel
       - run: fusesoc run --target=gpio_tb caravel
       - run: fusesoc run --target=pll_tb caravel
+
