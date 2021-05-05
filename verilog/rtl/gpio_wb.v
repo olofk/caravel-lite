@@ -98,17 +98,12 @@ module gpio #(
     output reg [31:0] iomem_rdata,
     output reg iomem_ready,
 
-    output gpio,
-    output gpio_oeb,
-    output gpio_pu,
-    output gpio_pd
+    output reg gpio,
+    output reg gpio_oeb,
+    output reg gpio_pu,
+    output reg gpio_pd
 );
 
-    reg gpio;		// GPIO output data
-    reg gpio_pu;		// GPIO pull-up enable
-    reg gpio_pd;		// GPIO pull-down enable
-    reg gpio_oeb;    // GPIO output enable (sense negative)
-    
     wire gpio_sel;
     wire gpio_oeb_sel;
     wire gpio_pu_sel;  
