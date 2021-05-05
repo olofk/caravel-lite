@@ -30,6 +30,7 @@ jobs:
   sim-icarus:
     needs: prepare
     runs-on: ubuntu-latest
+    steps:
       - run: echo $GITHUB_WORKSPACE/bin >> $GITHUB_PATH
       - run: fusesoc run --target=gpio_wb_tb caravel
       - run: fusesoc run --target=gpio_tb caravel
