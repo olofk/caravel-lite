@@ -52,7 +52,7 @@ filesets:
       - verilog/rtl/__user_project_wrapper.v : {is_include_file : true}
       - verilog/rtl/wb_intercon.v : {is_include_file : true}
     file_type : verilogSource
-    depend : [pdk]
+    depend : [skywatertechnology:sky130:sky130_fd_sc_hd]
 
   gpio_wb:
     files:
@@ -151,24 +151,28 @@ targets:
     
   gpio_tb:
     << : *caravel_test
+    description : gpio testbench
     filesets_append : [gpio_tb]
     generate: [firmware : {testcase : gpio}]
     toplevel : gpio_tb
     
   mprj_ctrl_tb:
     << : *caravel_test
+    description :
     filesets_append : [mprj_ctrl_tb]
     generate: [firmware : {testcase : mprj_ctrl}]
     toplevel : mprj_ctrl_tb
     
   perf_tb:
     << : *caravel_test
+    description :
     filesets_append : [perf_tb]
     generate: [firmware : {testcase : perf}]
     toplevel : perf_tb
 
   pll_tb:
     << : *caravel_test
+    description :
     filesets_append : [pll_tb]
     generate: [firmware : {testcase : pll}]
     toplevel : pll_tb
