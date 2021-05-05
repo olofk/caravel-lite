@@ -16,7 +16,6 @@ jobs:
           path: pdklite
       - run: wget https://github.com/stnolting/riscv-gcc-prebuilt/releases/download/rv32i-2.0.0/riscv32-unknown-elf.gcc-10.2.0.rv32i.ilp32.newlib.tar.gz -O - | tar xz
       - run: echo $GITHUB_WORKSPACE/bin >> $GITHUB_PATH
-      - run: sudo apt install iverilog
       - run: pip3 install fusesoc
       - run: fusesoc library add caravel $GITHUB_WORKSPACE/caravel-lite
       - run: fusesoc library add pdk $GITHUB_WORKSPACE/pdklite
@@ -31,6 +30,8 @@ jobs:
     needs: prepare
     runs-on: ubuntu-latest
     steps:
+      - run: sudo apt install iverilog
+      - run: pip3 install fusesoc
       - run: echo $GITHUB_WORKSPACE/bin >> $GITHUB_PATH
       - run: fusesoc run --target=gpio_wb_tb caravel
       - run: fusesoc run --target=gpio_tb caravel
